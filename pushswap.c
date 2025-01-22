@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pushswap.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucmansa <lucmansa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lucmansa <lucmansa@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:45:12 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/01/21 16:27:48 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/01/22 14:06:48 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,12 @@ int ft_checker(char *str)
 	return (1);
 }
 
+void ft_printlst(t_list **lst)
+{
+	while ((*lst) -> next != NULL)
+		printf("%s", (*lst) -> content);
+	(*lst) = (*lst) -> next;
+}
 
 int main(int argc, char **argv)
 {
@@ -119,12 +125,16 @@ int main(int argc, char **argv)
     if (argc < 3)
         return(0);
     i = 1;
-	printf("%d %i\n", i, ft_checker(argv[i]));
+	if (!(ft_checker(argv[i])))
+			return(0);
 	lst = ft_lstnew(atoi(argv[i]));
     while (++i < argc)
     {
-		printf("%d %i\n", i, ft_checker(argv[i]));
+		if (!(ft_checker(argv[i])))
+			return(0);
         ft_lstadd_last(&lst, ft_lstnew(ft_atoi(argv[i])));
     }
+	ft_printlst
+	ft_swapA(&lst);
 	ft_lstclear(&lst);
 }
