@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pushswap.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucmansa <lucmansa@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lucmansa <lucmansa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:45:12 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/01/22 14:07:06 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/01/23 16:57:49 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,16 +110,19 @@ int ft_checker(char *str)
 	return (1);
 }
 
-void ft_printlst(t_list **lst)
+void ft_printlst(t_list *lst)
 {
-	while ((*lst) -> next != NULL)
-		printf("%s", (*lst) -> content);
-	(*lst) = (*lst) -> next;
+	while (lst)
+	{
+		printf("%i\n", lst -> content);
+		lst = lst->next;
+	}
 }
 
 int main(int argc, char **argv)
 {
-    t_list	*lst;
+    t_list	*lstA;
+	t_list	*lstB;
     int     i;
 
     if (argc < 3)
@@ -127,14 +130,25 @@ int main(int argc, char **argv)
     i = 1;
 	if (!(ft_checker(argv[i])))
 			return(0);
-	lst = ft_lstnew(atoi(argv[i]));
+	lstA = ft_lstnew(atoi(argv[i]));
     while (++i < argc)
     {
 		if (!(ft_checker(argv[i])))
 			return(0);
-        ft_lstadd_last(&lst, ft_lstnew(ft_atoi(argv[i])));
+        ft_lstadd_last(&lstA, ft_lstnew(ft_atoi(argv[i])));
     }
-	//ft_printlst
-	ft_swapA(&lst);
-	ft_lstclear(&lst);
+	lstB = NULL;
+	ft_printlst(lstA);
+	ft_push(&lstA, &lstB);
+	printf("\n\n");
+	ft_printlst(lstA);
+	printf("\n");
+	ft_printlst(lstB);
+	ft_push(&lstB, &lstA);
+	printf("\n\n");
+	ft_printlst(lstA);
+	printf("\n");
+	ft_printlst(lstB);
+	printf("\n\n");
+	//ft_lstclear(&lst);
 }

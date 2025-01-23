@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pushswap.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucmansa <lucmansa@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lucmansa <lucmansa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:46:54 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/01/22 13:38:27 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/01/23 16:39:21 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ struct s_list *next;
 } t_list;
 
 void	ft_push(t_list **lstFROM, t_list **lstTO);
-void	ft_swapA(t_list **lstA);
+void	ft_swap(t_list **lstA);
+void	ft_rotate(t_list **lst);
+void	ft_rrotate(t_list **lst);
 
 #endif
