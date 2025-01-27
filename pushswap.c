@@ -6,7 +6,7 @@
 /*   By: lucmansa <lucmansa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:45:12 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/01/23 16:57:49 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:58:05 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int ft_checker(char *str)
 	}
 	if (ft_strlen(&str[i]) >= 10)
 	{
-		while (str[i] && (str[0] != '-' && str[i] <= "2147483647"[i] && "2147483647"[i])
+		while ((str[i] && ((str[0] != '-' && str[i] <= "2147483647"[i] && "2147483647"[i])))
 			|| (str[0] == '-' && str[i] <= "-2147483648"[i] && "-2147483648"[i]))
 			i++;
 		if (str[i])
@@ -112,7 +112,7 @@ int ft_checker(char *str)
 
 void ft_printlst(t_list *lst)
 {
-	while (lst)
+	while (lst)  
 	{
 		printf("%i\n", lst -> content);
 		lst = lst->next;
@@ -138,17 +138,7 @@ int main(int argc, char **argv)
         ft_lstadd_last(&lstA, ft_lstnew(ft_atoi(argv[i])));
     }
 	lstB = NULL;
-	ft_printlst(lstA);
+	printf("%i\n", ft_lstindx(lstA, 5));
 	ft_push(&lstA, &lstB);
-	printf("\n\n");
-	ft_printlst(lstA);
-	printf("\n");
-	ft_printlst(lstB);
-	ft_push(&lstB, &lstA);
-	printf("\n\n");
-	ft_printlst(lstA);
-	printf("\n");
-	ft_printlst(lstB);
-	printf("\n\n");
-	//ft_lstclear(&lst);
+	printf("%i\n", ft_lstindx(lstA, 5));
 }
