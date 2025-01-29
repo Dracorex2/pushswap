@@ -1,4 +1,4 @@
-NAME = pushswap
+NAME = push_swap
 SRCS =  algo_func.c  instruction.c  pushswap.c
 
 OBJS = $(SRCS:.c=.o)

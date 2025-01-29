@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pushswap.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucmansa <lucmansa@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lucmansa <lucmansa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:45:12 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/01/28 15:14:33 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/01/29 17:03:57 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ int main(int argc, char **argv)
 {
     t_list	*lstA;
 	t_list	*lstB;
-	t_list	*lstTMP;
     int     i;
 
     if (argc < 3)
@@ -139,12 +138,9 @@ int main(int argc, char **argv)
         ft_lstadd_last(&lstA, ft_lstnew(ft_atoi(argv[i])));
     }
 	lstB = NULL;
-	ft_push(&lstA, &lstB);
-	ft_push(&lstA, &lstB);
-	lstTMP = lstA;
-	while (lstTMP)
-	{
-		printf("%i\n", ft_lstcost(lstA, lstB, lstTMP->content));
-		lstTMP = lstTMP->next;
-	}
+	ft_push(&lstA, &lstB, 'b');
+	ft_push(&lstA, &lstB, 'b');
+	while (ft_lstcount(lstA) > 3)
+		ft_lstmove(&lstA, &lstB);
 }
+ 
