@@ -6,7 +6,7 @@
 /*   By: lucmansa <lucmansa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:21:38 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/01/29 18:43:52 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/01/29 18:58:32 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,10 +147,10 @@ void ft_lstmove(t_list **lstA, t_list **lstB)
 			ft_rrotate(lstA, 'a');
 	if (move > ft_lstmax((*lstB)) || move < ft_lstmin((*lstB)))
 		if (ft_lstindx((*lstB), ft_lstmax((*lstB))) < ft_lstcount((*lstB)) / 2)
-			while ((*lstB) -> content != move)
+			while ((*lstB) -> content != ft_lstmax((*lstB)))
 				ft_rotate(lstB, 'b');
 		else
-			while ((*lstB) -> content != move)
+			while ((*lstB) -> content != ft_lstmax((*lstB)))
 				ft_rrotate(lstB, 'b');
 	else
 	{
