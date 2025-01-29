@@ -3,7 +3,7 @@ SRCS =  algo_func.c  instruction.c  pushswap.c
 
 OBJS = $(SRCS:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror -Iutils
+CFLAGS = -Wall -Wextra -Werror -Iutils -g
 CC = cc
 
 all: $(NAME)

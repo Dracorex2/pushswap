@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pushswap.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucmansa <lucmansa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lucmansa <lucmansa@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:45:12 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/01/27 11:58:05 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/01/28 15:14:33 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ int main(int argc, char **argv)
 {
     t_list	*lstA;
 	t_list	*lstB;
+	t_list	*lstTMP;
     int     i;
 
     if (argc < 3)
@@ -138,7 +139,12 @@ int main(int argc, char **argv)
         ft_lstadd_last(&lstA, ft_lstnew(ft_atoi(argv[i])));
     }
 	lstB = NULL;
-	printf("%i\n", ft_lstindx(lstA, 5));
 	ft_push(&lstA, &lstB);
-	printf("%i\n", ft_lstindx(lstA, 5));
+	ft_push(&lstA, &lstB);
+	lstTMP = lstA;
+	while (lstTMP)
+	{
+		printf("%i\n", ft_lstcost(lstA, lstB, lstTMP->content));
+		lstTMP = lstTMP->next;
+	}
 }

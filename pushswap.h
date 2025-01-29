@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pushswap.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucmansa <lucmansa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lucmansa <lucmansa@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:46:54 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/01/27 11:54:22 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/01/28 14:52:59 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_rrotate(t_list **lst);
 
 int	ft_lstcost(t_list *lstA, t_list *lstB, int content);
 int	ft_lstindx(t_list *lst, int content);
-int	ft_lstmin(t_list **lst);
-int	ft_lstmax(t_list **lst);
+int	ft_lstmin(t_list *lst);
+int	ft_lstmax(t_list *lst);
 
 #endif
