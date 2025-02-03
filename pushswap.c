@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pushswap.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucmansa <lucmansa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lucmansa <lucmansa@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:45:12 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/01/30 19:18:09 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:05:31 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,13 @@ int main(int argc, char **argv)
 	while (ft_lstcount(lstA) > 3)
 		ft_lstmove(&lstA, &lstB);
 	ft_sort3(&lstA);
-	ft_pushback(&lstA, &lstB);
+	while (lstB)
+		ft_lstmove_back(&lstA, &lstB);
+	if (ft_lstindx(lstA, ft_lstmin(lstA)) < ft_lstcount(lstA))
+		while (lstA ->content != ft_lstmin(lstA))
+			ft_rotate(&lstA, 'a');
+	else
+		while (lstA ->content != ft_lstmin(lstA))
+			ft_rrotate(&lstA, 'a');
 }
  

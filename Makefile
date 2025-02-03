@@ -1,5 +1,5 @@
 NAME = push_swap
-SRCS =  algo_func.c  instruction.c  pushswap.c
+SRCS =  algo_func.c  instruction.c  pushswap.c  algo_push.c  algo_back.c
 
 OBJS = $(SRCS:.c=.o)
 
