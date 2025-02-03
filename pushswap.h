@@ -6,7 +6,7 @@
 /*   By: lucmansa <lucmansa@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:46:54 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/02/03 10:36:27 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:23:12 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	ft_push(t_list **lstFROM, t_list **lstTO, char c);
 void	ft_swap(t_list **lstA, char c);
 void	ft_rotate(t_list **lst, char c);
 void	ft_rrotate(t_list **lst, char c);
-
 
 int	ft_lstcost(t_list *lstA, t_list *lstB, int content);
 int ft_lstcount(t_list *lst);
