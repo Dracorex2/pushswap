@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   instruction.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucmansa <lucmansa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lucmansa <lucmansa@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:29:15 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/01/30 18:41:11 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/02/06 11:37:29 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_swap(t_list **lst, char c)
 	(*lst) = lstTMP;
 	if (c == 'a' || c == 'b')
 	{
-		write(1, "r", 1);
+		write(1, "s", 1);
 		write(1, &c, 1);
 		write(1, "\n", 1);
 	}

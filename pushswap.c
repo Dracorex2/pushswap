@@ -6,7 +6,7 @@
 /*   By: lucmansa <lucmansa@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:45:12 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/02/03 11:05:31 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/02/06 12:18:31 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,20 @@ int ft_checker(char *str)
 			return (0);
 	}
 	return (1);
+}
+
+int	ft_bigger(int A, int B)
+{
+	if (A > B)
+		return (A);
+	return (B);
+}
+
+int	ft_lower(int A, int B)
+{
+	if (A < B)
+		return (A);
+	return (B);
 }
 
 void ft_printlst(t_list *lst)

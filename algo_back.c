@@ -6,7 +6,7 @@
 /*   By: lucmansa <lucmansa@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:21:19 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/02/03 11:02:01 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/02/06 11:00:37 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int ft_nbneed_back(t_list *lst, int nb)
 {
 	int res;
 
-	res = 999999;
+	res = __INT_MAX__;
 	while (lst)
 	{
 		if ((lst ->content > nb) && (lst ->content <= res))

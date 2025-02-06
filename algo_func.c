@@ -6,7 +6,7 @@
 /*   By: lucmansa <lucmansa@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:21:38 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/02/03 10:46:11 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/02/06 12:04:35 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,22 @@ int	ft_lstmin(t_list *lst)
 	return (i);
 }
 
-int ft_lstcount(t_list *lst)
+int	ft_lstcount(t_list *lst)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (lst)
 	{
 		lst = lst->next;
-		i++; 
+		i++;
 	}
 	return (i);
 }
 
 int	ft_lstindx(t_list *lst, int content)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (lst)
@@ -75,39 +75,27 @@ int ft_checksorted(t_list *lst)
 {
 	int i;
 
-	while (lst)
+	while (1)
 	{
 		i = lst ->content;
+		lst = lst -> next;
+		if (!lst)
+			break;
 		if (i > lst ->content)
 			return (0);
-		lst = lst -> next;
 	}
 	return (1);
 }
 
 void ft_sort3(t_list **lst)
 {
+	if (ft_lstmax((*lst)) == (*lst)-> content)
+		ft_rotate(lst, 'a');
+	else if (ft_lstindx((*lst), ft_lstmax((*lst))) == 1)
+		ft_rrotate(lst, 'a');
 	if (!(ft_checksorted((*lst))))
-	{
-		if (ft_lstmin((*lst)) == (*lst) ->content)
-		{
-			ft_rrotate(lst, 'a');
-			ft_swap(lst, 'a');
-		}
-		else if (ft_lstmax((*lst)) == (*lst)-> content)
-		{
-			ft_rotate(lst, 'a');
-			if (!(ft_checksorted(*lst)))
-				ft_swap(lst, 'a');
-		}
-		else
-		{
-			if (ft_lstindx((*lst), ft_lstmax((*lst)) == 1))
-				ft_rrotate(lst, 'a');
-			else
-				ft_swap(lst, 'a');
-		}
-	}
+		ft_swap(lst, 'a');
+	return ;
 }
 
 //90 24 39 53 59 71 69 9 46 30

@@ -6,41 +6,83 @@
 /*   By: lucmansa <lucmansa@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:44 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/02/03 17:38:36 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/02/06 12:31:28 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-int	ft_lstcost(t_list *lstA, t_list *lstB, int content)
-{
-	int i;
 
-	i = 0;
-	i = ft_lstindx(lstA, content);
-	if (i > ft_lstcount(lstA) / 2)
-		i = ft_lstcount(lstA) - i;
-	if (content > ft_lstmax (lstB) || content < ft_lstmin (lstB))
+
+
+
+
+
+
+
+
+
+
+
+
+
+int	ft_lstcost(t_list *lstA, t_list *lstB, int nb)
+{
+	int	res;
+	int need;
+
+	res = 0;
+	need = ft_nbneed(lstB, nb);
+	if ((ft_lstindx(lstA, nb) <= ft_lstcount(lstA))
+		&& (ft_lstindx(lstB, need) <= ft_lstcount(lstB)))
+			res += ft_bigger(ft_lstindx(lstA, nb), ft_lstindx(lstB, need));
+	else if ((ft_lstindx(lstA, nb) > (ft_lstcount(lstA) / 2))
+		&& (ft_lstindx(lstB, need) > (ft_lstcount(lstB) / 2)))
 	{
-		if (ft_lstindx((lstB), ft_lstmax (lstB)) < ft_lstcount(lstB) / 2)
-			i += ft_lstindx((lstB), ft_lstmax (lstB));
+		if (ft_lstindx(lstA, nb) > ft_lstindx(lstB, need))
+			res += ft_lstcount(lstA) - ft_lstindx(lstA, nb);
 		else
-			i += ft_lstcount(lstB) - ft_lstindx((lstB), ft_lstmax (lstB));
+			res += ft_lstcount(lstB) - ft_lstindx(lstB, nb);
 	}
 	else
 	{
-		content = ft_nbneed(lstB, content);
-		if (ft_lstindx((lstB), content) < ft_lstcount(lstB) / 2)
-			i += ft_lstindx((lstB), content);
-		else
-			i += ft_lstcount(lstB) - ft_lstindx((lstB), content);
+		res += ft_lower(ft_lstindx(lstA, nb), ft_lstcount(lstA) - ft_lstindx(lstA, nb));
+		res += ft_lower(ft_lstindx(lstB, need), ft_lstcount(lstB) - ft_lstindx(lstB, need));
 	}
-	return (i + 1);
 }
+
+
+
+
+//int	ft_lstcost(t_list *lstA, t_list *lstB, int content)
+//{
+//	int	i;
+//
+//	i = 0;
+//	i = ft_lstindx(lstA, content);
+//	if (i > ft_lstcount(lstA) / 2)
+//		i = ft_lstcount(lstA) - i;
+//	if (content > ft_lstmax (lstB) || content < ft_lstmin (lstB))
+//	{
+//		if (ft_lstindx((lstB), ft_lstmax (lstB)) < ft_lstcount(lstB) / 2)
+//			i += ft_lstindx((lstB), ft_lstmax (lstB));
+//		else
+//			i += ft_lstcount(lstB) - ft_lstindx((lstB), ft_lstmax (lstB));
+//	}
+//	else
+//	{
+//		content = ft_nbneed(lstB, content);
+//		if (ft_lstindx((lstB), content) < ft_lstcount(lstB) / 2)
+//			i += ft_lstindx((lstB), content);
+//		else
+//			i += ft_lstcount(lstB) - ft_lstindx((lstB), content);
+//	}
+//	return (i + 1);
+//}
 
 int	ft_lsttomove(t_list *lstA, t_list *lstB)
 {
-	int i;
+	int	i;
 	int	res;
 	t_list *lstTMP;
 
@@ -57,9 +99,9 @@ int	ft_lsttomove(t_list *lstA, t_list *lstB)
 	}
 	return (res);
 }
-int ft_nbneed(t_list *lst, int nb)
+int	ft_nbneed(t_list *lst, int nb)
 {
-	int res;
+	int	res;
 
 	res = 0;
 	while (lst)
@@ -71,35 +113,42 @@ int ft_nbneed(t_list *lst, int nb)
 	return (res);
 }
 
+
 void ft_lstmove(t_list **lstA, t_list **lstB)
 {
-	int move;
-
-	move = ft_lsttomove((*lstA), (*lstB));
-	if (ft_lstindx((*lstA), move) < ft_lstcount((*lstA)) / 2)
-		while ((*lstA) -> content != move)
-			ft_rotate(lstA, 'a');
-	else
-		while ((*lstA) -> content != move)
-			ft_rrotate(lstA, 'a');
-	if (move > ft_lstmax((*lstB)) || move < ft_lstmin((*lstB)))
-	{
-		if (ft_lstindx((*lstB), ft_lstmax((*lstB))) < ft_lstcount((*lstB)) / 2)
-			while ((*lstB) -> content != ft_lstmax((*lstB)))
-				ft_rotate(lstB, 'b');
-		else
-			while ((*lstB) -> content != ft_lstmax((*lstB)))
-				ft_rrotate(lstB, 'b');
-	}
-	else
-	{
-		move = ft_nbneed((*lstB), move);
-		if (ft_lstindx((*lstB), move) < ft_lstcount((*lstB)) / 2)
-			while ((*lstB) -> content != move)
-				ft_rotate(lstB, 'b');
-		else
-			while ((*lstB) -> content != move)
-				ft_rrotate(lstB, 'b');
-	}
-	ft_push(lstA, lstB, 'b');
+	if ((ft_lstindx(lstA, nb) <= ft_lstcount(lstA))
+		&& (ft_lstindx(lstB, need) <= ft_lstcount(lstB)))
 }
+
+//void ft_lstmove(t_list **lstA, t_list **lstB)
+//{
+//	int move;
+//
+//	move = ft_lsttomove((*lstA), (*lstB));
+//	if (ft_lstindx((*lstA), move) < ft_lstcount((*lstA)) / 2)
+//		while ((*lstA) -> content != move)
+//			ft_rotate(lstA, 'a');
+//	else
+//		while ((*lstA) -> content != move)
+//			ft_rrotate(lstA, 'a');
+//	if (move > ft_lstmax((*lstB)) || move < ft_lstmin((*lstB)))
+//	{
+//		if (ft_lstindx((*lstB), ft_lstmax((*lstB))) < ft_lstcount((*lstB)) / 2)
+//			while ((*lstB) -> content != ft_lstmax((*lstB)))
+//				ft_rotate(lstB, 'b');
+//		else
+//			while ((*lstB) -> content != ft_lstmax((*lstB)))
+//				ft_rrotate(lstB, 'b');
+//	}
+//	else
+//	{
+//		move = ft_nbneed((*lstB), move);
+//		if (ft_lstindx((*lstB), move) < ft_lstcount((*lstB)) / 2)
+//			while ((*lstB) -> content != move)
+//				ft_rotate(lstB, 'b');
+//		else
+//			while ((*lstB) -> content != move)
+//				ft_rrotate(lstB, 'b');
+//	}
+//	ft_push(lstA, lstB, 'b');
+//}
