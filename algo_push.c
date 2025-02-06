@@ -6,7 +6,7 @@
 /*   By: lucmansa <lucmansa@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:44 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/02/06 12:31:28 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/02/06 14:11:16 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	ft_lstcost(t_list *lstA, t_list *lstB, int nb)
 
 	res = 0;
 	need = ft_nbneed(lstB, nb);
-	if ((ft_lstindx(lstA, nb) <= ft_lstcount(lstA))
-		&& (ft_lstindx(lstB, need) <= ft_lstcount(lstB)))
+	if ((ft_lstindx(lstA, nb) <= (ft_lstcount(lstA) / 2))
+		&& (ft_lstindx(lstB, need) <= (ft_lstcount(lstB) / 2)))
 			res += ft_bigger(ft_lstindx(lstA, nb), ft_lstindx(lstB, need));
 	else if ((ft_lstindx(lstA, nb) > (ft_lstcount(lstA) / 2))
 		&& (ft_lstindx(lstB, need) > (ft_lstcount(lstB) / 2)))
@@ -49,9 +49,8 @@ int	ft_lstcost(t_list *lstA, t_list *lstB, int nb)
 		res += ft_lower(ft_lstindx(lstA, nb), ft_lstcount(lstA) - ft_lstindx(lstA, nb));
 		res += ft_lower(ft_lstindx(lstB, need), ft_lstcount(lstB) - ft_lstindx(lstB, need));
 	}
+	return (res + 1);
 }
-
-
 
 
 //int	ft_lstcost(t_list *lstA, t_list *lstB, int content)
@@ -113,11 +112,34 @@ int	ft_nbneed(t_list *lst, int nb)
 	return (res);
 }
 
-
 void ft_lstmove(t_list **lstA, t_list **lstB)
 {
-	if ((ft_lstindx(lstA, nb) <= ft_lstcount(lstA))
-		&& (ft_lstindx(lstB, need) <= ft_lstcount(lstB)))
+	int to_move;
+	int need;
+
+	to_move = ft_lsttomove((*lstA), (*lstB));
+	need = ft_nbneed((*lstB), to_move);
+	if ((ft_lstindx((*lstA), to_move) <= (ft_lstcount((*lstA)) / 2))
+		&& (ft_lstindx((*lstB), need) <= (ft_lstcount((*lstB)) / 2)))
+			while (((*lstA) -> content != to_move) && (*lstB) -> content != need)
+				ft_drotate(lstA, lstB, 'n');
+	else if ((ft_lstindx((*lstA), to_move) > (ft_lstcount((*lstA)) / 2))
+		&& (ft_lstindx((*lstB), need) > (ft_lstcount((*lstB)) / 2)))
+			while (((*lstA) -> content != to_move) && (*lstB) -> content != need)
+				ft_drotate(lstA, lstB, 'r');
+	if (ft_lstindx((*lstA), to_move) <= (ft_lstcount((*lstA)) / 2))
+		while ((*lstA) -> content != to_move)
+			ft_rotate(lstA, 'a');
+	else if (ft_lstindx((*lstA), to_move) > (ft_lstcount((*lstA)) / 2))
+		while ((*lstA) -> content != to_move)
+			ft_rrotate(lstA, 'a');
+	if (ft_lstindx((*lstB), need) <= (ft_lstcount((*lstB)) / 2))
+		while ((*lstB) -> content != need)
+			ft_rotate(lstB, 'b');
+	else if (ft_lstindx((*lstB), need) > (ft_lstcount((*lstB)) / 2))
+		while ((*lstB) -> content != need)
+			ft_rrotate(lstB, 'b');
+	ft_push(lstA, lstB, 'b');
 }
 
 //void ft_lstmove(t_list **lstA, t_list **lstB)
