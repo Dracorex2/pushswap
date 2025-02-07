@@ -6,7 +6,7 @@
 /*   By: lucmansa <lucmansa@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:21:38 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/02/06 12:04:35 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/02/07 11:17:59 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,30 @@ int	ft_lstindx(t_list *lst, int content)
 	}
 	return (i);
 }
+
+
+int	ft_lstrevindx(t_list *lst, int content)
+{
+	int	i;
+
+	i = 0;
+	while (lst -> content != content)
+		lst = lst -> next;
+	while (lst -> next)
+	{
+		i++;
+		lst = lst -> next;
+	}
+	return (i);
+}
+
+int ft_abs(int nb)
+{
+	if (nb < 0)
+		return (nb * -1);
+	return (nb);
+}
+
 
 /////////////////////////////////
 int ft_checksorted(t_list *lst)

@@ -6,7 +6,7 @@
 /*   By: lucmansa <lucmansa@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:29:15 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/02/06 13:38:58 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/02/07 10:44:42 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,6 @@ void	ft_drotate(t_list **lstA, t_list **lstB, char c)
 	{
 		ft_rotate(lstA, 'n');
 		ft_rotate(lstB,'n');
-		write(1, "rr\n", 4);
+		write(1, "rr\n", 3);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lucmansa <lucmansa@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:45:12 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/02/06 12:18:31 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/02/07 11:19:27 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ int main(int argc, char **argv)
         ft_lstadd_last(&lstA, ft_lstnew(ft_atoi(argv[i])));
     }
 	lstB = NULL;
+	(void)lstB;
 	ft_push(&lstA, &lstB, 'b');
 	ft_push(&lstA, &lstB, 'b');
 	while (ft_lstcount(lstA) > 3)

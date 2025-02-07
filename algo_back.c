@@ -6,36 +6,33 @@
 /*   By: lucmansa <lucmansa@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:21:19 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/02/06 11:00:37 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/02/07 13:10:05 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-int	ft_lstcost_back(t_list *lstA, t_list *lstB, int content)
+int	ft_lstcost_back(t_list *lstA, t_list *lstB, int nb)
 {
-	int i;
+	int	rA;
+	int	rB;
+	int need;
 
-	i = 0;
-	i = ft_lstindx(lstB, content);
-	if (i > ft_lstcount(lstB) / 2)
-		i = ft_lstcount(lstB) - i;
-	if (content > ft_lstmax (lstA) || content < ft_lstmin (lstA))
-	{
-		if (ft_lstindx((lstA), ft_lstmin (lstA)) < ft_lstcount(lstA) / 2)
-			i += ft_lstindx((lstA), ft_lstmax (lstA));
-		else
-			i += ft_lstcount(lstA) - ft_lstindx((lstA), ft_lstmin (lstA));
-	}
+	rA = 0;
+	rB = 0;
+	need = ft_nbneed_back(lstA, nb);
+	rB = ft_lstindx(lstA, nb);
+	if (rB > ft_lstcount(lstB) / 2)
+		rB = -(ft_lstrevindx(lstB, nb));
+	rA = ft_lstindx(lstA, need);
+	if (rA > ft_lstcount(lstA) / 2)
+		rA = -(ft_lstrevindx(lstA, need));
+	if (rA > 0 && rB > 0)
+		return(ft_bigger(rA, rB));
+	else if (rA < 0 && rB < 0)
+		return(ft_bigger(ft_abs(rA), ft_abs(rB)));
 	else
-	{
-		content = ft_nbneed_back(lstA, content);
-		if (ft_lstindx((lstA), content) < ft_lstcount(lstA) / 2)
-			i += ft_lstindx((lstA), content);
-		else
-			i += ft_lstcount(lstA) - ft_lstindx((lstA), content);
-	}
-	return (i + 1);
+		return (ft_abs(rA) + ft_abs(rB));
 }
 
 int	ft_lsttomove_back(t_list *lstA, t_list *lstB)
@@ -62,10 +59,12 @@ int ft_nbneed_back(t_list *lst, int nb)
 {
 	int res;
 
-	res = __INT_MAX__;
+	if (nb > ft_lstmax(lst) || nb < ft_lstmin(lst))
+		return (ft_lstmax(lst));
+	res = 0;
 	while (lst)
 	{
-		if ((lst ->content > nb) && (lst ->content <= res))
+		if ((lst ->content > nb) && (lst ->content >= res))
 			res = lst ->content;
 		lst = lst->next;
 	}
@@ -74,33 +73,30 @@ int ft_nbneed_back(t_list *lst, int nb)
 
 void ft_lstmove_back(t_list **lstA, t_list **lstB)
 {
-	int move;
+	int to_move;
+	int need;
 
-	move = ft_lsttomove_back((*lstA), (*lstB));
-	if (ft_lstindx((*lstB), move) < ft_lstcount((*lstB)) / 2)
-		while ((*lstB) -> content != move)
+	need = ft_lsttomove_back((*lstA), (*lstB));
+	to_move = ft_nbneed_back((*lstA), need);
+	if ((ft_lstindx((*lstA), to_move) <= (ft_lstcount((*lstA)) / 2))
+		&& (ft_lstindx((*lstB), need) <= (ft_lstcount((*lstB)) / 2)))
+			while (((*lstA) -> content != to_move) && (*lstB) -> content != need)
+				ft_drotate(lstA, lstB, 'n');
+	else if ((ft_lstindx((*lstA), to_move) >= (ft_lstcount((*lstA)) / 2))
+		&& (ft_lstindx((*lstB), need) >= (ft_lstcount((*lstB)) / 2)))
+			while (((*lstA) -> content != to_move) && (*lstB) -> content != need)
+				ft_drotate(lstA, lstB, 'r');
+	if (ft_lstindx((*lstA), to_move) <= (ft_lstcount((*lstA)) / 2))
+		while ((*lstA) -> content != to_move)
+			ft_rotate(lstA, 'a');
+	else if (ft_lstindx((*lstA), to_move) >= (ft_lstcount((*lstA)) / 2))
+		while ((*lstA) -> content != to_move)
+			ft_rrotate(lstA, 'a');
+	if (ft_lstindx((*lstB), need) <= (ft_lstcount((*lstB)) / 2))
+		while ((*lstB) -> content != need)
 			ft_rotate(lstB, 'b');
-	else
-		while ((*lstB) -> content != move)
+	else if (ft_lstindx((*lstB), need) >= (ft_lstcount((*lstB)) / 2))
+		while ((*lstB) -> content != need)
 			ft_rrotate(lstB, 'b');
-	if (move > ft_lstmax((*lstA)) || move < ft_lstmin((*lstA)))
-	{
-		if (ft_lstindx((*lstA), ft_lstmin((*lstA))) < ft_lstcount((*lstA)) / 2)
-			while ((*lstA) -> content != ft_lstmin((*lstA)))
-				ft_rotate(lstA, 'a');
-		else
-			while ((*lstA) -> content != ft_lstmin((*lstA)))
-				ft_rrotate(lstA, 'a');
-	}
-	else
-	{
-		move = ft_nbneed_back((*lstA), move);
-		if (ft_lstindx((*lstA), move) < ft_lstcount((*lstA)) / 2)
-			while ((*lstA) -> content != move)
-				ft_rotate(lstA, 'a');
-		else
-			while ((*lstA) -> content != move)
-				ft_rrotate(lstA, 'a');
-	}
 	ft_push(lstB, lstA, 'a');
 }
