@@ -6,88 +6,16 @@
 /*   By: lucmansa <lucmansa@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:45:12 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/02/07 11:19:27 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/02/10 12:23:43 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
-#include <stdlib.h>
 
-t_list *ft_lstnew(int content)
-{
-	t_list	*res;
-
-	res = malloc(sizeof(t_list));
-	if (!res)
-		return (0);
-	res->content = content;
-	res->next = 0;
-	return (res);
-}
-
-void	ft_lstadd_last(t_list **lst, t_list *new)
-{
-	t_list	*res;
-
-	if (!(*lst))
-	{
-		(*lst) = new;
-		return ;
-	}
-	res = (*lst);
-	while (res-> next != 0)
-		res = res-> next;
-	res->next = new;
-}
-
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
-}
-
-void	ft_lstclear(t_list **lst)
-{
-	t_list	*next;
-	t_list	*current;
-
-	current = (*lst);
-	while (current != NULL)
-	{
-		next = current->next;
-		free(current);
-		current = next;
-	}
-	*lst = NULL;
-}
-
-int	ft_atoi(const char *nptr)
-{
-	int	nbr;
-	int	i;
-	int	sign;
-
-	nbr = 0;
-	i = 0;
-	sign = 1;
-	while (nptr[i] == ' ' || (nptr[i] >= '\t' && nptr[i] <= '\r'))
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
-		if (nptr[i++] == '-')
-			sign *= -1;
-	while (nptr[i] >= '0' && nptr[i] <= '9')
-		nbr = nbr * 10 + (nptr[i++] - '0');
-	return (nbr * sign);
-}
-
-int ft_checker(char *str)
+int	ft_checker(char *str)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = 0;
 	if (str[i] == '-')
@@ -101,8 +29,10 @@ int ft_checker(char *str)
 	}
 	if (ft_strlen(&str[i]) >= 10)
 	{
-		while ((str[i] && ((str[0] != '-' && str[i] <= "2147483647"[i] && "2147483647"[i])))
-			|| (str[0] == '-' && str[i] <= "-2147483648"[i] && "-2147483648"[i]))
+		while ((str[i] && ((str[0] != '-' && str[i] <= "2147483647"[i]
+						&& "2147483647"[i])))
+			|| (str[0] == '-' && str[i] <= "-2147483648"[i]
+				&& "-2147483648"[i]))
 			i++;
 		if (str[i])
 			return (0);
@@ -110,61 +40,76 @@ int ft_checker(char *str)
 	return (1);
 }
 
-int	ft_bigger(int A, int B)
+int	ft_strcmp(char *s1, char *s2)
 {
-	if (A > B)
-		return (A);
-	return (B);
+	int	i;
+
+	i = 0;
+	while (s1[i] != '\0' && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
 }
 
-int	ft_lower(int A, int B)
+int	ft_checkdouble(char **str)
 {
-	if (A < B)
-		return (A);
-	return (B);
-}
+	int	i;
+	int	j;
 
-void ft_printlst(t_list *lst)
-{
-	while (lst)  
+	i = 0;
+	while (str[++i])
 	{
-		printf("%i\n", lst -> content);
-		lst = lst->next;
+		j = i;
+		while (str[++j])
+		{
+			if (ft_strcmp(str[j], str[i]) == 0)
+				return (0);
+		}
 	}
+	return (1);
 }
 
-int main(int argc, char **argv)
+void	ft_sort(t_list	**lstA, t_list	**lstB)
 {
-    t_list	*lstA;
-	t_list	*lstB;
-    int     i;
-
-    if (argc < 3)
-        return(0);
-    i = 1;
-	if (!(ft_checker(argv[i])))
-			return(0);
-	lstA = ft_lstnew(atoi(argv[i]));
-    while (++i < argc)
-    {
-		if (!(ft_checker(argv[i])))
-			return(0);
-        ft_lstadd_last(&lstA, ft_lstnew(ft_atoi(argv[i])));
-    }
-	lstB = NULL;
-	(void)lstB;
-	ft_push(&lstA, &lstB, 'b');
-	ft_push(&lstA, &lstB, 'b');
-	while (ft_lstcount(lstA) > 3)
-		ft_lstmove(&lstA, &lstB);
-	ft_sort3(&lstA);
-	while (lstB)
-		ft_lstmove_back(&lstA, &lstB);
-	if (ft_lstindx(lstA, ft_lstmin(lstA)) < ft_lstcount(lstA))
-		while (lstA ->content != ft_lstmin(lstA))
-			ft_rotate(&lstA, 'a');
+	if (ft_lstcount((*lstA)) > 3)
+	{
+		ft_push(lstA, lstB, 'b');
+		ft_push(lstA, lstB, 'b');
+	}
+	while (ft_lstcount((*lstA)) > 3)
+	{
+		ft_lstmove(lstA, lstB);
+		ft_push(lstA, lstB, 'b');
+	}
+	ft_sort3(lstA);
+	while ((*lstB))
+		ft_lstmove_back(lstA, lstB);
+	if (ft_lstindx((*lstA), ft_lstmin((*lstA))) < ft_lstcount((*lstA)) / 2)
+		while ((*lstA)-> content != ft_lstmin((*lstA)))
+			ft_rotate(lstA, 'a');
 	else
-		while (lstA ->content != ft_lstmin(lstA))
-			ft_rrotate(&lstA, 'a');
+		while ((*lstA)-> content != ft_lstmin((*lstA)))
+			ft_rrotate(lstA, 'a');
 }
- 
+
+int	main(int argc, char **argv)
+{
+	t_list	*lsta;
+	t_list	*lstb;
+	int		i;
+
+	if (argc < 3 || !ft_checkdouble(argv))
+		return (write(2, "Error\n", 6), 0);
+	i = 1;
+	if (!(ft_checker(argv[i])))
+		return (write(2, "Error\n", 6), 0);
+	lsta = ft_lstnew(atoi(argv[i]));
+	while (++i < argc)
+	{
+		if (!(ft_checker(argv[i])))
+			return (write(2, "Error\n", 6), 0);
+		ft_lstadd_last(&lsta, ft_lstnew(ft_atoi(argv[i])));
+	}
+	lstb = NULL;
+	ft_sort(&lsta, &lstb);
+	return (ft_lstclear(&lsta), 1);
+}

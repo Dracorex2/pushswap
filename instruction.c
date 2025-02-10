@@ -6,7 +6,7 @@
 /*   By: lucmansa <lucmansa@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:29:15 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/02/07 10:44:42 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/02/10 12:16:58 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 void	ft_push(t_list **lstFROM, t_list **lstTO, char c)
 {
-	t_list *lstTMP;
-	
-	lstTMP = (*lstFROM);
-	(*lstFROM) = (*lstFROM) -> next;
+	t_list	*lsttmp;
+
+	if (!lstFROM)
+		return ;
+	lsttmp = (*lstFROM);
+	(*lstFROM) = (*lstFROM)-> next;
 	if (lstTO)
-		lstTMP->next = (*lstTO);
-	(*lstTO) = lstTMP; 
+		lsttmp -> next = (*lstTO);
+	(*lstTO) = lsttmp;
 	if (c == 'a' || c == 'b')
 	{
 		write(1, "p", 1);
@@ -31,12 +33,14 @@ void	ft_push(t_list **lstFROM, t_list **lstTO, char c)
 
 void	ft_swap(t_list **lst, char c)
 {
-	t_list *lstTMP;
-	
-	lstTMP = (*lst)->next;
-	(*lst)->next = lstTMP->next;
-	lstTMP->next = (*lst);	
-	(*lst) = lstTMP;
+	t_list	*lsttmp;
+
+	if (!(*lst) || !(*lst)-> next)
+		return ;
+	lsttmp = (*lst)-> next;
+	(*lst)-> next = lsttmp -> next;
+	lsttmp -> next = (*lst);
+	(*lst) = lsttmp;
 	if (c == 'a' || c == 'b')
 	{
 		write(1, "s", 1);
@@ -47,16 +51,16 @@ void	ft_swap(t_list **lst, char c)
 
 void	ft_rotate(t_list **lst, char c)
 {
-	t_list *lstTMP;
-	t_list *lstCross;
+	t_list	*lsttmp;
+	t_list	*lstcross;
 
-	lstTMP = (*lst)->next;
-	lstCross = (*lst);
-	while (lstCross->next != NULL)
-		lstCross = lstCross->next;
-	(*lst)->next = NULL;
-	lstCross->next = (*lst);
-	(*lst) = lstTMP;
+	lsttmp = (*lst)-> next;
+	lstcross = (*lst);
+	while (lstcross -> next != NULL)
+		lstcross = lstcross -> next;
+	(*lst)-> next = NULL;
+	lstcross->next = (*lst);
+	(*lst) = lsttmp;
 	if (c == 'a' || c == 'b')
 	{
 		write(1, "r", 1);
@@ -67,18 +71,18 @@ void	ft_rotate(t_list **lst, char c)
 
 void	ft_rrotate(t_list **lst, char c)
 {
-	t_list *lstCross;
-	t_list *lstPreCross;
+	t_list	*lstcross;
+	t_list	*lstprecross;
 
-	lstCross = (*lst);
-	while (lstCross->next != NULL)
+	lstcross = (*lst);
+	while (lstcross -> next != NULL)
 	{
-		lstPreCross = lstCross;
-		lstCross = lstCross->next;
+		lstprecross = lstcross;
+		lstcross = lstcross -> next;
 	}
-	lstPreCross->next = NULL;
-	lstCross->next = (*lst);
-	(*lst) = lstCross;
+	lstprecross -> next = NULL;
+	lstcross -> next = (*lst);
+	(*lst) = lstcross;
 	if (c == 'a' || c == 'b')
 	{
 		write(1, "rr", 2);
@@ -92,13 +96,13 @@ void	ft_drotate(t_list **lstA, t_list **lstB, char c)
 	if (c == 'r')
 	{
 		ft_rrotate(lstA, 'n');
-		ft_rrotate(lstB,'n');
+		ft_rrotate(lstB, 'n');
 		write(1, "rrr\n", 4);
 	}
 	else
 	{
 		ft_rotate(lstA, 'n');
-		ft_rotate(lstB,'n');
+		ft_rotate(lstB, 'n');
 		write(1, "rr\n", 3);
 	}
 }
