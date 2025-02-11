@@ -6,7 +6,7 @@
 /*   By: lucmansa <lucmansa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:45:12 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/02/11 15:10:19 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:58:19 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,9 @@
 
 int	ft_checker(char *str)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	if (str[i] == '-' && !(str[i + 1] >= '0' && str[i + 1] <= '9'))
+	if (ft_strlen(str) > 15 || ft_atol(str) > 2147483647
+		|| ft_atol(str) < -2147483648)
 		return (0);
-	if (str[i] == '-')
-		i++;
-	j = i - 1;
-	while (str[++j])
-		if (!(str[j] >= '0' && str[j] <= '9'))
-			return (0);
-	if (ft_strlen(&str[i]) >= 10)
-	{
-		while (str[i] && ((str[0] != '-' && str[i] == "2147483647"[i])
-				|| (str[0] == '-' && str[i] == "-2147483648"[i])))
-			i++;
-		if ((str[0] != '-' && str[i] <= "2147483647"[i])
-			|| (str[0] == '-' && str[i] <= "-2147483648"[i]))
-			return (1);
-		if (str[i])
-			return (0);
-	}
 	return (1);
 }
 
@@ -91,19 +71,19 @@ int	main(int argc, char **argv)
 	int		i;
 
 	if (argc < 2)
-		return (write(2, "Error\n", 6), 0);
+		return (write(2, "Error\n", 6), 1);
 	i = 1;
 	if (!(ft_checker(argv[i])))
-		return (write(2, "Error\n", 6), 0);
+		return (write(2, "Error\n", 6), 1);
 	lsta = ft_lstnew(atoi(argv[i]));
 	while (++i < argc)
 	{
-		if (!ft_checker(argv[i]) || !ft_checkdouble(lsta, ft_atoi(argv[i])))
-			return (write(2, "Error\n", 6), 0);
-		ft_lstadd_last(&lsta, ft_lstnew(ft_atoi(argv[i])));
+		if (!ft_checker(argv[i]) || !ft_checkdouble(lsta, ft_atol(argv[i])))
+			return (ft_lstclear(&lsta), write(2, "Error\n", 6), 1);
+		ft_lstadd_last(&lsta, ft_lstnew(ft_atol(argv[i])));
 	}
 	lstb = NULL;
 	if (!ft_checksorted(lsta))
 		ft_sort(&lsta, &lstb);
-	return (ft_lstclear(&lsta), 1);
+	return (ft_lstclear(&lsta), 0);
 }

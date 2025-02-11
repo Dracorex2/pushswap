@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucmansa <lucmansa@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lucmansa <lucmansa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:08:12 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/02/10 11:48:02 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:57:32 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ int	ft_lower(int A, int B)
 	return (B);
 }
 
-int	ft_atoi(const char *nptr)
+long int	ft_atol(const char *nptr)
 {
-	int	nbr;
-	int	i;
-	int	sign;
+	long int	nbr;
+	int			i;
+	int			sign;
 
 	nbr = 0;
 	i = 0;
