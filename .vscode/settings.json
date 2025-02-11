@@ -1,6 +1,8 @@
 {
     "C_Cpp.default.compilerPath": "/bin/clang",
     "files.associations": {
-        "limits": "c"
+        "limits": "c",
+        "sstream": "c",
+        "regex": "c"
     }
 }

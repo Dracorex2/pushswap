@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pushswap.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucmansa <lucmansa@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lucmansa <lucmansa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:45:12 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/02/10 12:23:43 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/02/11 10:27:43 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,14 @@ int	ft_checker(char *str)
 	int	j;
 
 	i = 0;
+	if (str[i] == '-' && !(str[i + 1] >= '0' && str[i + 1] <= '9'))
+		return (0);
 	if (str[i] == '-')
 		i++;
-	j = i;
-	while (str[j])
-	{
+	j = i - 1;
+	while (str[++j])
 		if (!(str[j] >= '0' && str[j] <= '9'))
 			return (0);
-		j++;
-	}
 	if (ft_strlen(&str[i]) >= 10)
 	{
 		while ((str[i] && ((str[0] != '-' && str[i] <= "2147483647"[i]
@@ -50,20 +49,16 @@ int	ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
-int	ft_checkdouble(char **str)
+int	ft_checkdouble(t_list *lst, int nb)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	while (str[++i])
+	while (lst)
 	{
-		j = i;
-		while (str[++j])
-		{
-			if (ft_strcmp(str[j], str[i]) == 0)
-				return (0);
-		}
+		if (lst -> content == nb)
+			return (0);
+		lst = lst -> next;
 	}
 	return (1);
 }
@@ -97,7 +92,7 @@ int	main(int argc, char **argv)
 	t_list	*lstb;
 	int		i;
 
-	if (argc < 3 || !ft_checkdouble(argv))
+	if (argc < 2)
 		return (write(2, "Error\n", 6), 0);
 	i = 1;
 	if (!(ft_checker(argv[i])))
@@ -107,9 +102,12 @@ int	main(int argc, char **argv)
 	{
 		if (!(ft_checker(argv[i])))
 			return (write(2, "Error\n", 6), 0);
+		if (!ft_checkdouble(lsta, ft_atoi(argv[i])))
+			return (write(2, "Error\n", 6), 0);
 		ft_lstadd_last(&lsta, ft_lstnew(ft_atoi(argv[i])));
 	}
 	lstb = NULL;
-	ft_sort(&lsta, &lstb);
+	if (!ft_checksorted(lsta))
+		ft_sort(&lsta, &lstb);
 	return (ft_lstclear(&lsta), 1);
 }
