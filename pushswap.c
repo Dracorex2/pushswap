@@ -6,7 +6,7 @@
 /*   By: lucmansa <lucmansa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:45:12 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/02/11 10:27:43 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:10:19 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@ int	ft_checker(char *str)
 			return (0);
 	if (ft_strlen(&str[i]) >= 10)
 	{
-		while ((str[i] && ((str[0] != '-' && str[i] <= "2147483647"[i]
-						&& "2147483647"[i])))
-			|| (str[0] == '-' && str[i] <= "-2147483648"[i]
-				&& "-2147483648"[i]))
+		while (str[i] && ((str[0] != '-' && str[i] == "2147483647"[i])
+				|| (str[0] == '-' && str[i] == "-2147483648"[i])))
 			i++;
+		if ((str[0] != '-' && str[i] <= "2147483647"[i])
+			|| (str[0] == '-' && str[i] <= "-2147483648"[i]))
+			return (1);
 		if (str[i])
 			return (0);
 	}
@@ -51,9 +52,6 @@ int	ft_strcmp(char *s1, char *s2)
 
 int	ft_checkdouble(t_list *lst, int nb)
 {
-	int	i;
-
-	i = 0;
 	while (lst)
 	{
 		if (lst -> content == nb)
@@ -100,9 +98,7 @@ int	main(int argc, char **argv)
 	lsta = ft_lstnew(atoi(argv[i]));
 	while (++i < argc)
 	{
-		if (!(ft_checker(argv[i])))
-			return (write(2, "Error\n", 6), 0);
-		if (!ft_checkdouble(lsta, ft_atoi(argv[i])))
+		if (!ft_checker(argv[i]) || !ft_checkdouble(lsta, ft_atoi(argv[i])))
 			return (write(2, "Error\n", 6), 0);
 		ft_lstadd_last(&lsta, ft_lstnew(ft_atoi(argv[i])));
 	}
