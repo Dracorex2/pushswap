@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo_back.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucmansa <lucmansa@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lucmansa <lucmansa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:21:19 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/02/10 11:54:39 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:31:59 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_nbneed_back(t_list *lst, int nb)
 
 	if (nb > ft_lstmax(lst) || nb < ft_lstmin(lst))
 		return (ft_lstmin(lst));
-	res = __INT_MAX__;
+	res = INT_MAX;
 	while (lst)
 	{
 		if ((lst ->content > nb) && (lst ->content <= res))

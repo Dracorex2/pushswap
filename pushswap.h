@@ -6,7 +6,7 @@
 /*   By: lucmansa <lucmansa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:46:54 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/02/11 15:56:52 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:29:49 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+# define INT_MAX 2147483647
+# define INT_MIN -2147483648
 
 typedef struct s_list
 {

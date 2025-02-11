@@ -6,7 +6,7 @@
 /*   By: lucmansa <lucmansa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:45:12 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/02/11 16:01:06 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:29:56 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,16 @@
 
 int	ft_checker(char *str)
 {
-	if (ft_strlen(str) > 15 || ft_atol(str) > 2147483647
-		|| ft_atol(str) < -2147483648)
+	int	i;
+
+	i = -1;
+	if (str[++i] != '-')
+		--i;
+	while (str[++i])
+		if (!(str[i] >= '0' && str[i] <= '9'))
+			return (0);
+	if (ft_strlen(str) > 15 || ft_atol(str) > INT_MAX
+		|| ft_atol(str) < INT_MIN)
 		return (0);
 	return (1);
 }
@@ -70,8 +78,8 @@ int	main(int argc, char **argv)
 	t_list	*lstb;
 	int		i;
 
-	if (argc < 2)
-		return (write(2, "Error\n", 6), 1);
+	if (argc == 1)
+		return (0);
 	i = 1;
 	if (!(ft_checker(argv[i])))
 		return (write(2, "Error\n", 6), 1);
