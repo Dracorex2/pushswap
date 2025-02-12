@@ -6,48 +6,11 @@
 /*   By: lucmansa <lucmansa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:45:12 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/02/11 18:29:56 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:51:50 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
-
-int	ft_checker(char *str)
-{
-	int	i;
-
-	i = -1;
-	if (str[++i] != '-')
-		--i;
-	while (str[++i])
-		if (!(str[i] >= '0' && str[i] <= '9'))
-			return (0);
-	if (ft_strlen(str) > 15 || ft_atol(str) > INT_MAX
-		|| ft_atol(str) < INT_MIN)
-		return (0);
-	return (1);
-}
-
-int	ft_strcmp(char *s1, char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i] != '\0' && s1[i] == s2[i])
-		i++;
-	return (s1[i] - s2[i]);
-}
-
-int	ft_checkdouble(t_list *lst, int nb)
-{
-	while (lst)
-	{
-		if (lst -> content == nb)
-			return (0);
-		lst = lst -> next;
-	}
-	return (1);
-}
 
 void	ft_sort(t_list	**lstA, t_list	**lstB)
 {

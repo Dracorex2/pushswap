@@ -6,7 +6,7 @@
 /*   By: lucmansa <lucmansa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:44 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/02/11 18:30:28 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/02/12 18:16:42 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft_lstcost(t_list *lstA, t_list *lstB, int nb)
 	else
 		return (ft_abs(ra) + ft_abs(rb));
 }
-//-8593 -7511 -8946 -6626 -2586 -5649 -6877 386 -5043 -2174 -7793 -151 -3660 -4188 -8706 -7933 903 -4024 -5190 -578
+
 int	ft_lsttomove(t_list *lstA, t_list *lstB)
 {
 	int		i;
@@ -58,6 +58,7 @@ int	ft_lsttomove(t_list *lstA, t_list *lstB)
 int	ft_nbneed(t_list *lst, int nb)
 {
 	int	res;
+
 	if (nb > ft_lstmax(lst) || nb < ft_lstmin(lst))
 		return (ft_lstmax(lst));
 	res = INT_MIN;
@@ -80,11 +81,11 @@ void	ft_lstmove(t_list **lstA, t_list **lstB)
 	if ((ft_lstindx((*lstA), to_move) <= (ft_lstcount((*lstA)) / 2))
 		&& (ft_lstindx((*lstB), need) <= (ft_lstcount((*lstB)) / 2)))
 		while (((*lstA)-> content != to_move) && (*lstB)-> content != need)
-			ft_drotate(lstA, lstB, 'n');
+			ft_drotate(lstA, lstB, "rr");
 	else if ((ft_lstindx((*lstA), to_move) >= (ft_lstcount((*lstA)) / 2))
 		&& (ft_lstindx((*lstB), need) >= (ft_lstcount((*lstB)) / 2)))
 		while (((*lstA)-> content != to_move) && (*lstB)-> content != need)
-			ft_drotate(lstA, lstB, 'r');
+			ft_drotate(lstA, lstB, "rrr");
 	if (ft_lstindx((*lstA), to_move) <= (ft_lstcount((*lstA)) / 2))
 		while ((*lstA)-> content != to_move)
 			ft_rotate(lstA, 'a');
