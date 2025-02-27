@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucmansa <lucmansa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lucmansa <lucmansa@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 18:53:31 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/02/12 18:17:44 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/02/27 18:30:30 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,25 @@
 
 int	ft_ex_action(t_list **lsta, t_list **lstb, char *str)
 {
-	if (ft_strcmp(str, "sa\n") == 0)
+	if (ft_strncmp(str, "sa\n", 3))
 		return (ft_swap(lsta, 'n'), 1);
-	else if (ft_strcmp(str, "sb\n") == 0)
+	else if (ft_strncmp(str, "sb\n", 3))
 		return (ft_swap(lstb, 'n'), 1);
-	else if (ft_strcmp(str, "pb\n") == 0)
+	else if (ft_strncmp(str, "pb\n", 3))
 		return (ft_push(lsta, lstb, 'n'), 1);
-	else if (ft_strcmp(str, "pa\n") == 0)
+	else if (ft_strncmp(str, "pa\n", 3))
 		return (ft_push(lstb, lsta, 'n'), 1);
-	else if (ft_strcmp(str, "ra\n") == 0)
+	else if (ft_strncmp(str, "ra\n", 3))
 		return (ft_rotate(lsta, 'n'), 1);
-	else if (ft_strcmp(str, "rb\n") == 0)
+	else if (ft_strncmp(str, "rb\n", 3))
 		return (ft_rotate(lstb, 'n'), 1);
-	else if (ft_strcmp(str, "rra\n") == 0)
+	else if (ft_strncmp(str, "rra\n", 4))
 		return (ft_rrotate(lsta, 'n'), 1);
-	else if (ft_strcmp(str, "rrb\n") == 0)
+	else if (ft_strncmp(str, "rrb\n", 4))
 		return (ft_rrotate(lstb, 'n'), 1);
-	else if (ft_strcmp(str, "rr\n") == 0)
+	else if (ft_strncmp(str, "rr\n", 3))
 		return (ft_drotate(lsta, lstb, "rrn"), 1);
-	else if (ft_strcmp(str, "rrr\n") == 0)
+	else if (ft_strncmp(str, "rrr\n", 4))
 		return (ft_drotate(lsta, lstb, "rrrn"), 1);
 	else
 		return (0);
