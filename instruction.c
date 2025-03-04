@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   instruction.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucmansa <lucmansa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lucmansa <lucmansa@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:29:15 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/02/12 18:10:20 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/02/27 18:26:17 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,26 +93,26 @@ void	ft_rrotate(t_list **lst, char c)
 
 void	ft_drotate(t_list **lstA, t_list **lstB, char *str)
 {
-	if (ft_strcmp(str, "rrr"))
+	if (ft_strncmp(str, "rrrn", 4))
+	{
+		ft_rrotate(lstA, 'n');
+		ft_rrotate(lstB, 'n');
+	}
+	else if (ft_strncmp(str, "rrn", 3))
+	{
+		ft_rotate(lstA, 'n');
+		ft_rotate(lstB, 'n');
+	}
+	else if (ft_strncmp(str, "rrr", 3))
 	{
 		ft_rrotate(lstA, 'n');
 		ft_rrotate(lstB, 'n');
 		write(1, "rrr\n", 4);
 	}
-	else if (ft_strcmp(str, "rr"))
+	else if (ft_strncmp(str, "rr", 2))
 	{
 		ft_rotate(lstA, 'n');
 		ft_rotate(lstB, 'n');
 		write(1, "rr\n", 3);
-	}
-	else if (ft_strcmp(str, "rrrn"))
-	{
-		ft_rrotate(lstA, 'n');
-		ft_rrotate(lstB, 'n');
-	}
-	else if (ft_strcmp(str, "rrn"))
-	{
-		ft_rotate(lstA, 'n');
-		ft_rotate(lstB, 'n');
 	}
 }
