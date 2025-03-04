@@ -6,7 +6,7 @@
 /*   By: lucmansa <lucmansa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:07:13 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/02/12 18:16:13 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/03/04 16:08:59 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,13 @@ int	ft_checker(char *str)
 	i = -1;
 	if (str[++i] != '-')
 		--i;
+	if (!str[i + 1])
+		return (0);
 	while (str[++i])
 		if (!(str[i] >= '0' && str[i] <= '9'))
 			return (0);
+	while (*str == '0')
+		str++;
 	if (ft_strlen(str) > 15 || ft_atol(str) > INT_MAX
 		|| ft_atol(str) < INT_MIN)
 		return (0);
