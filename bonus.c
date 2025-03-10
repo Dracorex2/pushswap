@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   bonus.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucmansa <lucmansa@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lucmansa <lucmansa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 18:53:31 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/02/27 18:30:30 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/03/10 16:19:20 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
+
+void	ft_sswap(t_list **lsta, t_list **lstb)
+{
+	ft_swap(lsta, 'n');
+	ft_swap(lstb, 'n');
+}
 
 int	ft_ex_action(t_list **lsta, t_list **lstb, char *str)
 {
