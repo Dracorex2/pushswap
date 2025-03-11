@@ -6,7 +6,7 @@
 /*   By: lucmansa <lucmansa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 18:53:31 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/03/10 16:19:20 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/03/10 17:25:03 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	ft_ex_action(t_list **lsta, t_list **lstb, char *str)
 		return (ft_swap(lsta, 'n'), 1);
 	else if (ft_strncmp(str, "sb\n", 3))
 		return (ft_swap(lstb, 'n'), 1);
+	else if (ft_strncmp(str, "ss\n", 3))
+		return (ft_sswap(lsta, lstb), 1);
 	else if (ft_strncmp(str, "pb\n", 3))
 		return (ft_push(lsta, lstb, 'n'), 1);
 	else if (ft_strncmp(str, "pa\n", 3))
@@ -48,16 +50,22 @@ int	ft_read_action(t_list **lsta, t_list **lstb)
 {
 	char	*str;
 
-	while (1)
+	while (!ft_checksorted((*lsta)))
 	{
 		str = get_next_line(0);
 		if (!str)
 			break ;
 		if (!ft_ex_action(lsta, lstb, str))
-			return (0);
+		{
+			write(2, "Error\n", 6);
+			free(str);
+			ft_lstclear(lsta);
+			ft_lstclear(lstb);
+			exit(1);
+		}
 		free(str);
 	}
-	if (ft_checksorted((*lsta)) && !(*lstb))
+	if (!(*lstb))
 		return (1);
 	else
 		return (0);
@@ -85,5 +93,6 @@ int	main(int argc, char **argv)
 	if (ft_read_action(&lsta, &lstb))
 		return (ft_lstclear(&lsta), write(1, "OK\n", 3), 0);
 	else
-		return (ft_lstclear(&lsta), write(1, "KO\n", 3), 0);
+		return (ft_lstclear(&lsta), ft_lstclear(&lstb)
+			, write(1, "KO\n", 3), 0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   instruction.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucmansa <lucmansa@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lucmansa <lucmansa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:29:15 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/02/27 18:26:17 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/03/10 17:23:31 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_push(t_list **lstFROM, t_list **lstTO, char c)
 {
 	t_list	*lsttmp;
 
-	if (!lstFROM)
+	if (!(*lstFROM) || !(*lstFROM)-> next)
 		return ;
 	lsttmp = (*lstFROM);
 	(*lstFROM) = (*lstFROM)-> next;
@@ -54,6 +54,8 @@ void	ft_rotate(t_list **lst, char c)
 	t_list	*lsttmp;
 	t_list	*lstcross;
 
+	if (!(*lst) || !(*lst)-> next)
+		return ;
 	lsttmp = (*lst)-> next;
 	lstcross = (*lst);
 	while (lstcross -> next != NULL)
@@ -74,6 +76,8 @@ void	ft_rrotate(t_list **lst, char c)
 	t_list	*lstcross;
 	t_list	*lstprecross;
 
+	if (!(*lst) || !(*lst)-> next)
+		return ;
 	lstcross = (*lst);
 	while (lstcross -> next != NULL)
 	{
