@@ -6,7 +6,7 @@
 /*   By: lucmansa <lucmansa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 18:53:31 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/03/10 17:25:03 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/03/18 15:39:15 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_read_action(t_list **lsta, t_list **lstb)
 {
 	char	*str;
 
-	while (!ft_checksorted((*lsta)))
+	while (1)
 	{
 		str = get_next_line(0);
 		if (!str)
@@ -58,6 +58,7 @@ int	ft_read_action(t_list **lsta, t_list **lstb)
 		if (!ft_ex_action(lsta, lstb, str))
 		{
 			write(2, "Error\n", 6);
+			get_next_line(0);
 			free(str);
 			ft_lstclear(lsta);
 			ft_lstclear(lstb);

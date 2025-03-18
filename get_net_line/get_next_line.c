@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucmansa <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lucmansa <lucmansa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 12:17:21 by lucmansa          #+#    #+#             */
-/*   Updated: 2024/11/26 19:06:34 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/03/18 15:38:32 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,7 @@ char	*get_next_line(int fd)
 	res = ft_return(&rest);
 	if (ft_strchr(res, '\n') == -1)
 		return (free(rest), rest = NULL, res);
+	if (rest && !rest[0])
+		(free(rest), rest = NULL);
 	return (res);
 }
