@@ -6,7 +6,7 @@
 /*   By: lucmansa <lucmansa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:29:15 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/03/10 17:23:31 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/03/18 18:23:30 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_push(t_list **lstFROM, t_list **lstTO, char c)
 {
 	t_list	*lsttmp;
 
-	if (!(*lstFROM) || !(*lstFROM)-> next)
+	if (!(*lstFROM))
 		return ;
 	lsttmp = (*lstFROM);
 	(*lstFROM) = (*lstFROM)-> next;

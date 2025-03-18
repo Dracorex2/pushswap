@@ -6,7 +6,7 @@
 /*   By: lucmansa <lucmansa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 18:53:31 by lucmansa          #+#    #+#             */
-/*   Updated: 2025/03/18 15:39:15 by lucmansa         ###   ########.fr       */
+/*   Updated: 2025/03/18 18:42:08 by lucmansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ int	main(int argc, char **argv)
 		ft_lstadd_last(&lsta, ft_lstnew(ft_atol(argv[i])));
 	}
 	lstb = NULL;
-	if (ft_read_action(&lsta, &lstb))
+	ft_read_action(&lsta, &lstb);
+	if (lsta && ft_checksorted(lsta) && !lstb)
 		return (ft_lstclear(&lsta), write(1, "OK\n", 3), 0);
 	else
 		return (ft_lstclear(&lsta), ft_lstclear(&lstb)
